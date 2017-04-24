@@ -1,0 +1,5 @@
+# Bitbucket Server Pre-Receive No Configuration Example Plugin
+
+A simple repository hook example for rejecting deletion of all branches.
+
+See the [developer docs](https://developer.atlassian.com/bitbucket/server/docs/latest) for more details.

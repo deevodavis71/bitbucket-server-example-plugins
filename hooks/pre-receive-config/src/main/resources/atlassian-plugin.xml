@@ -1,0 +1,23 @@
+<atlassian-plugin key="${project.groupId}.${project.artifactId}" name="${project.name}" plugins-version="3">
+	<plugin-info>
+		<description>Provides a Hook for Bitbucket Server, which allows pushes to be denied</description>
+		<vendor name="${project.organization.name}" url="${project.organization.url}"/>
+		<version>${project.version}</version>
+		<permissions>
+			<permission>execute_java</permission>
+		</permissions>
+	</plugin-info>
+
+	<repository-hook key="disableRefChanges" name="Disable Ref Changes"
+					 class="com.mycompany.example.plugin.myhook.ProtectRefHook">
+		<description>Disables changes to a specified reference (branch or tag) in this repository</description>
+		<icon>icons/example.png</icon>
+		<config-form name="Ref Hook Config" key="refHook-config">
+			<view>com.atlassian.bitbucket.repository.hook.ref.formContents</view>
+			<directory location="/static/"/>
+		</config-form>
+		<!-- Validators can be declared separately -->
+		<validator>com.mycompany.example.plugin.myhook.RefValidator</validator>
+	</repository-hook>
+
+</atlassian-plugin>

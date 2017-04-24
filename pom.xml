@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.atlassian.bitbucket.server</groupId>
+    <artifactId>bitbucket-example-plugins-parent</artifactId>
+    <version>4.0.0-SNAPSHOT</version>
+
+    <organization>
+        <name>Atlassian</name>
+        <url>http://www.atlassian.com/</url>
+    </organization>
+
+    <name>Bitbucket Server Examples - Parent</name>
+    <description>A collection of plugins that demonstrate how to use the Bitbucket Server API/SPI to build plugins</description>
+    <packaging>pom</packaging>
+
+    <scm>
+        <connection>scm:git:ssh://git@bitbucket.org/atlassian/bitbucket-example-plugins.git</connection>
+        <developerConnection>scm:git:ssh://git@bitbucket.org/atlassian/bitbucket-example-plugins.git</developerConnection>
+        <url>https://bitbucket.org/atlassian/bitbucket-example-plugins</url>
+    </scm>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>com.atlassian.bitbucket.server</groupId>
+                <artifactId>bitbucket-parent</artifactId>
+                <version>${bitbucket.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+
+    <modules>
+      <module>authentication</module>
+      <module>hooks</module>
+      <module>plugin-decorators</module>
+      <module>pull-request-ui</module>
+    </modules>
+
+    <properties>
+        <bitbucket.version>4.0.0</bitbucket.version>
+        <bitbucket.data.version>${bitbucket.version}</bitbucket.data.version>
+        <amps.version>6.1.0-6cf99b0</amps.version>
+    </properties>
+</project>

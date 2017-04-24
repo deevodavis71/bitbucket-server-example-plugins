@@ -1,0 +1,37 @@
+<atlassian-plugin key="${project.groupId}.${project.artifactId}" name="${project.name}" plugins-version="3">
+    <plugin-info>
+        <description>${project.description}</description>
+        <version>${project.version}</version>
+        <vendor name="${project.organization.name}" url="${project.organization.url}" />
+        <param name="plugin-icon">images/pluginIcon.png</param>
+        <param name="plugin-logo">images/pluginLogo.png</param>
+        <permissions>
+            <permission>execute_java</permission>
+        </permissions>
+    </plugin-info>
+
+    <!-- add our i18n resource -->
+    <resource type="i18n" name="i18n" location="bitbucket-pull-request-example-plugin"/>
+
+    <client-resource key="pr-overview-resources" name="Pull Request Overview Resources">
+        <directory location="/css/" />
+        <directory location="/js/" />
+        <directory location="/soy/" />
+
+        <dependency>com.atlassian.auiplugin:ajs</dependency>
+        <dependency>com.atlassian.bitbucket.server.bitbucket-web-api:pull-request-web-panels</dependency>
+    </client-resource>
+
+    <client-web-panel name="PR TODOs link" key="pr-overview-todo-panel" location="bitbucket.pull-request.related-entities" weight="2000">
+        <client-context-provider>MyCompany.TODO.getTODOStats</client-context-provider>
+        <resource name="view" type="soy" location="com.atlassian.bitbucket.server.bitbucket-example-pull-request-plugin:pr-overview-resources/com.mycompany.todo.prOverviewPanel" />
+        <dependency>com.atlassian.bitbucket.server.bitbucket-example-pull-request-plugin:pr-overview-resources</dependency>
+    </client-web-panel>
+
+    <client-web-panel key="comment-create-todo" location="bitbucket.pull-request.links">
+        <client-condition>MyCompany.TODO._pullRequestIsOpen</client-condition>
+        <resource name="view" type="soy" location="com.atlassian.bitbucket.server.bitbucket-example-pull-request-plugin:pr-overview-resources/com.mycompany.todo.todoForm" />
+        <dependency>com.atlassian.bitbucket.server.bitbucket-example-pull-request-plugin:pr-overview-resources</dependency>
+    </client-web-panel>
+
+</atlassian-plugin>

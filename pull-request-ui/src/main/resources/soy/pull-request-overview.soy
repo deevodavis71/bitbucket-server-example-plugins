@@ -1,0 +1,39 @@
+{namespace com.mycompany.todo}
+
+/**
+ * @param count The count of TODOs in this PR.
+ */
+{template .prOverviewPanel}
+    {call bitbucket.feature.pullRequest.relatedEntitiesWebPanel}
+        {param linkText: $count == 1 ? 'TODO' : 'TODOs' /}
+        {param linkHref: '#' /}
+        {param iconClass: 'todo-icon' /}
+        {param count: $count /}
+        {param extraClasses: 'mycompany-todos-link'  /}
+    {/call}
+{/template}
+
+/**
+ * @param todos
+ */
+{template .todoList}
+    <ul class="todo-list">
+        {foreach $todo in $todos}
+            <li data-todo-id="{$todo.id}">
+                <span>{$todo.text}</span>
+                <a class="remove" href="#">Remove</a>
+            </li>
+        {ifempty}
+            <li>You don't have any TODOs</li>
+        {/foreach}
+    </ul>
+{/template}
+
+/**
+ */
+{template .todoForm}
+    <form class="aui" id="create-todo">
+        <label>Add TODO</label>
+        <input type="text" name="todo-text" />
+    </form>
+{/template}

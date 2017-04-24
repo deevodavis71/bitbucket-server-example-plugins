@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<atlassian-plugin key="${project.groupId}.${project.artifactId}" name="${project.name}" plugins-version="3">
+    <plugin-info>
+        <description>${project.description}</description>
+        <version>${project.version}</version>
+        <vendor name="${project.organization.name}" url="${project.organization.url}"/>
+        <permissions>
+            <permission>execute_java</permission>
+        </permissions>
+    </plugin-info>
+
+    <!-- Servlets -->
+
+    <servlet name="Project Servlet" key="project-servlet" class="com.mycompany.example.plugin.servlet.ProjectServlet">
+        <description key="project-servlet.description">The Project Servlet Plugin</description>
+        <url-pattern>/example/project/*</url-pattern>
+    </servlet>
+
+    <servlet name="Repository Servlet" key="repository-servlet"
+             class="com.mycompany.example.plugin.servlet.RepositoryServlet">
+        <description key="repository-servlet.description">The Repository Servlet Plugin</description>
+        <url-pattern>/example/repository/*</url-pattern>
+    </servlet>
+
+    <servlet name="Pull Request Servlet" key="pull-request-servlet"
+             class="com.mycompany.example.plugin.servlet.PullRequestServlet">
+        <description key="pull-request-servlet.description">The Pull Request Servlet Plugin</description>
+        <url-pattern>/example/pull-request/*</url-pattern>
+    </servlet>
+
+    <servlet name="Profile Servlet" key="profile-servlet" class="com.mycompany.example.plugin.servlet.ProfileServlet">
+        <description key="profile-servlet.description">The Profile Servlet Plugin</description>
+        <url-pattern>/example/profile/*</url-pattern>
+    </servlet>
+
+    <servlet name="Account Servlet" key="account-servlet" class="com.mycompany.example.plugin.servlet.AccountServlet">
+        <description key="profile-servlet.description">The Account Servlet Plugin</description>
+        <url-pattern>/example/account/*</url-pattern>
+    </servlet>
+
+    <!-- Client web resources -->
+
+    <client-resource key="example-soy" name="Example Soy Templates">
+        <directory location="/templates/"/>
+    </client-resource>
+
+    <!-- Web items -->
+
+    <web-item key="project-plugin-tab" name="Project navigation tab" section="atl.project.nav" weight="35">
+        <label>My plugin</label>
+        <link>/plugins/servlet/example/project/${project.key}</link>
+        <tooltip>Hooray, we have a tab!</tooltip>
+        <!-- optional style for the icon: see https://design.atlassian.com/2.0/product/foundations/iconography for a list of available images -->
+        <param name="iconClass" value="aui-icon-small aui-iconfont-edit" />
+    </web-item>
+
+    <web-item key="project-settings-plugin-tab" name="Project settings navigation tab" section="bitbucket.project.settings.panel" weight="20">
+        <label>My plugin</label>
+        <link>/plugins/servlet/example/project/${project.key}/settings</link>
+        <tooltip>Hooray, we have a tab!</tooltip>
+    </web-item>
+
+    <web-item key="repository-plugin-tab" name="Repository navigation tab" section="bitbucket.repository.nav" weight="50">
+        <label>My plugin</label>
+        <link>/plugins/servlet/example/repository/${repository.project.key}/${repository.slug}</link>
+        <tooltip>Hooray, we have a tab!</tooltip>
+        <!-- optional style for the icon: see https://design.atlassian.com/2.0/product/foundations/iconography for a list of available images -->
+        <param name="iconClass" value="aui-icon-small aui-iconfont-edit" />
+    </web-item>
+
+    <web-item key="repository-settings-plugin-tab" name="Repository settings navigation tab"
+              section="bitbucket.repository.settings.panel/repository-settings-section" weight="50">
+        <label>My plugin</label>
+        <link>/plugins/servlet/example/repository/${repository.project.key}/${repository.slug}/settings</link>
+        <tooltip>Hooray, we have a tab!</tooltip>
+    </web-item>
+
+    <web-item key="pull-request-plugin-tab" name="Pull Request navigation tab"
+              section="bitbucket.pull-request.nav" weight="50">
+        <label>My plugin</label>
+        <link>/plugins/servlet/example/pull-request/${pullRequest.toRef.repository.project.key}/${pullRequest.toRef.repository.slug}/${pullRequest.id}</link>
+        <tooltip>Hooray, we have a tab!</tooltip>
+    </web-item>
+
+    <web-item key="profile-plugin-tab" name="Profile navigation tab" section="bitbucket.user.profile.secondary.tabs"
+              weight="20">
+        <label>My plugin</label>
+        <link>/plugins/servlet/example/profile/${profileUser.name}</link>
+        <tooltip>Hooray, we have a tab!</tooltip>
+    </web-item>
+
+    <web-item key="account-plugin-tab" name="Account navigation tab" section="bitbucket.user.account.nav" weight="100">
+        <label>My plugin</label>
+        <link>/plugins/servlet/example/account/${accountUser.name}</link>
+        <tooltip>Hooray, we have a tab!</tooltip>
+    </web-item>
+
+</atlassian-plugin>

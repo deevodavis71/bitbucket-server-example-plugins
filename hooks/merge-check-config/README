@@ -1,0 +1,6 @@
+# Bitbucket Server Merge-Check Example Plugin Hook
+
+A basic merge-check hook plugin that enforces that pull requests must have a minimum number of acceptances before
+they can be merged.
+
+See the [developer docs](https://developer.atlassian.com/bitbucket/server/docs/latest) for more details.

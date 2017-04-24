@@ -1,0 +1,16 @@
+{namespace bitbucket.config.example.hook.simple}
+
+/**
+ * @param config
+ * @param? errors
+ */
+{template .formContents}
+    {call aui.form.textField}
+        {param id: 'url' /}
+        {param value: $config['url'] /}
+        {param labelContent: getText('bitbucket.web.test.hook.config.label') /}
+        {param descriptionText: getText('bitbucket.web.test.hook.config.description') /}
+        {param extraClasses: 'long' /}
+        {param errorTexts: $errors ? $errors['url'] : null /}
+    {/call}
+{/template}
