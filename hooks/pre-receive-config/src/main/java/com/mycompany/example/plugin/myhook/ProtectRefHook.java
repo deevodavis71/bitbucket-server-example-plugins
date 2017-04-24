@@ -1,16 +1,14 @@
 package com.mycompany.example.plugin.myhook;
 
-import com.atlassian.bitbucket.hook.HookResponse;
-import com.atlassian.bitbucket.hook.repository.PreReceiveRepositoryHook;
-import com.atlassian.bitbucket.hook.repository.RepositoryHookContext;
+import com.atlassian.bitbucket.hook.repository.*;
 import com.atlassian.bitbucket.repository.Ref;
 import com.atlassian.bitbucket.repository.RefChange;
 import com.atlassian.bitbucket.repository.RefService;
+import com.atlassian.bitbucket.repository.ResolveRefRequest;
 
 import javax.annotation.Nonnull;
-import java.util.Collection;
 
-public class ProtectRefHook implements PreReceiveRepositoryHook {
+public class ProtectRefHook implements PreRepositoryHook<RepositoryPushHookRequest> {
 
     private final RefService refService;
 
@@ -18,26 +16,23 @@ public class ProtectRefHook implements PreReceiveRepositoryHook {
         this.refService = refService;
     }
 
-
-    /**
-     * Disables changes to a ref
-     */
+    @Nonnull
     @Override
-    public boolean onReceive(@Nonnull RepositoryHookContext context,
-                             @Nonnull Collection<RefChange> refChanges,
-                             @Nonnull HookResponse hookResponse) {
+    public RepositoryHookResult preUpdate(@Nonnull PreRepositoryHookContext context,
+                                          @Nonnull RepositoryPushHookRequest request) {
         String refId = context.getSettings().getString("ref-id");
-        Ref found = refService.resolveRef(context.getRepository(), refId);
+        Ref found = refService.resolveRef(new ResolveRefRequest.Builder(request.getRepository())
+                .refId(refId)
+                .build());
         if (found != null) {
-            for (RefChange refChange : refChanges) {
+            for (RefChange refChange : request.getRefChanges()) {
                 String changeRefId = refChange.getRef().getId();
                 if (changeRefId.equals(found.getId())) {
-                    hookResponse.err().println("The ref '" + changeRefId + "' cannot be altered.");
-                    return false;
+                    return RepositoryHookResult.rejected(
+                            "Protected ref", "The ref '" + changeRefId + "' cannot be altered.");
                 }
             }
         }
-
-        return true;
+        return RepositoryHookResult.accepted();
     }
 }

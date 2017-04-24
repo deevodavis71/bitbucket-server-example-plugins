@@ -3,6 +3,7 @@ package com.mycompany.example.plugin.myhook;
 import com.atlassian.bitbucket.repository.Ref;
 import com.atlassian.bitbucket.repository.RefService;
 import com.atlassian.bitbucket.repository.Repository;
+import com.atlassian.bitbucket.repository.ResolveRefRequest;
 import com.atlassian.bitbucket.setting.RepositorySettingsValidator;
 import com.atlassian.bitbucket.setting.Settings;
 import com.atlassian.bitbucket.setting.SettingsValidationErrors;
@@ -25,7 +26,7 @@ public class RefValidator implements RepositorySettingsValidator {
         if (StringUtils.isEmpty(refId)) {
             settingsValidationErrors.addFieldError("ref-id", "The ref id must be specified");
         } else {
-            Ref ref = refService.resolveRef(repository, refId);
+            Ref ref = refService.resolveRef(new ResolveRefRequest.Builder(repository).refId(refId).build());
             if (ref == null) {
                 settingsValidationErrors.addFieldError("ref-id", "Failed to find the ref");
             }

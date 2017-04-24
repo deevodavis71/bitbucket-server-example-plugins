@@ -1,27 +1,25 @@
 package com.mycompany.example.plugin.myhook;
 
-import com.atlassian.bitbucket.hook.*;
 import com.atlassian.bitbucket.hook.repository.*;
 import com.atlassian.bitbucket.repository.*;
 
 import javax.annotation.Nonnull;
-import java.util.Collection;
 
-public class MyRepositoryHook implements PreReceiveRepositoryHook {
+public class MyRepositoryHook implements PreRepositoryHook<RepositoryPushHookRequest> {
 
     /**
      * Disables deletion of branches
      */
+    @Nonnull
     @Override
-    public boolean onReceive(@Nonnull RepositoryHookContext context,
-                             @Nonnull Collection<RefChange> refChanges,
-                             @Nonnull HookResponse hookResponse) {
-        for (RefChange refChange : refChanges) {
+    public RepositoryHookResult preUpdate(@Nonnull PreRepositoryHookContext context,
+                                          @Nonnull RepositoryPushHookRequest request) {
+        for (RefChange refChange : request.getRefChanges()) {
             if (refChange.getType() == RefChangeType.DELETE) {
-                hookResponse.err().println("The ref '" + refChange.getRefId() + "' cannot be deleted.");
-                return false;
+                return RepositoryHookResult.rejected("Deletion blocked",
+                        "The ref '" + refChange.getRef().getId() + "' cannot be deleted.");
             }
         }
-        return true;
+        return RepositoryHookResult.accepted();
     }
 }

@@ -6,18 +6,17 @@ import com.atlassian.bitbucket.setting.*;
 
 import javax.annotation.Nonnull;
 import java.net.URL;
-import java.util.Collection;
 
 /**
  * Note that hooks can implement RepositorySettingsValidator directly.
  */
-public class MyRepositoryHook implements AsyncPostReceiveRepositoryHook, RepositorySettingsValidator {
+public class MyRepositoryHook implements PostRepositoryHook<RepositoryHookRequest>, RepositorySettingsValidator {
 
     /**
      * Connects to a configured URL to notify of all changes.
      */
     @Override
-    public void postReceive(@Nonnull RepositoryHookContext context, @Nonnull Collection<RefChange> refChanges) {
+    public void postUpdate(@Nonnull PostRepositoryHookContext context, @Nonnull RepositoryHookRequest request) {
         String url = context.getSettings().getString("url");
         if (url != null) {
             try {

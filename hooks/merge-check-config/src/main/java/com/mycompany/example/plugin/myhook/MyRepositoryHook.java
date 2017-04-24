@@ -5,22 +5,25 @@ import com.atlassian.bitbucket.pull.PullRequestParticipant;
 
 import javax.annotation.Nonnull;
 
-public class MyRepositoryHook implements RepositoryMergeRequestCheck {
+public class MyRepositoryHook implements PreRepositoryHook<PullRequestMergeHookRequest> {
 
     /**
-     * Vetos a pull-request if there aren't enough reviewers.
+     * Vetoes a pull-request if there aren't enough reviewers.
      */
+    @Nonnull
     @Override
-    public void check(@Nonnull RepositoryMergeRequestCheckContext context) {
+    public RepositoryHookResult preUpdate(@Nonnull PreRepositoryHookContext context,
+                                          @Nonnull PullRequestMergeHookRequest request) {
         int requiredReviewers = context.getSettings().getInt("reviewers", 0);
         int acceptedCount = 0;
-        for (PullRequestParticipant reviewer : context.getMergeRequest().getPullRequest().getReviewers()) {
+        for (PullRequestParticipant reviewer : request.getPullRequest().getReviewers()) {
             acceptedCount = acceptedCount + (reviewer.isApproved() ? 1 : 0);
         }
         if (acceptedCount < requiredReviewers) {
-            context.getMergeRequest().veto("Not enough approved reviewers", acceptedCount +
+            return RepositoryHookResult.rejected("Not enough approved reviewers", acceptedCount +
                     " reviewers have approved your pull request. You need " + requiredReviewers +
                     " (total) before you may merge.");
         }
+        return RepositoryHookResult.accepted();
     }
 }

@@ -6,7 +6,7 @@
     <parent>
         <groupId>com.atlassian.bitbucket.server</groupId>
         <artifactId>bitbucket-example-plugins-hooks-parent</artifactId>
-        <version>4.0.0-SNAPSHOT</version>
+        <version>5.0.0-SNAPSHOT</version>
     </parent>
 
     <artifactId>bitbucket-example-merge-check-config</artifactId>
@@ -34,6 +34,10 @@
             <groupId>com.atlassian.bitbucket.server</groupId>
             <artifactId>bitbucket-util</artifactId>
             <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.atlassian.bitbucket.server</groupId>
+            <artifactId>bitbucket-spi</artifactId>
         </dependency>
     </dependencies>
     <build>
