@@ -1,0 +1,18 @@
+{namespace hook.guide.example.hook.simple}
+
+/**
+ * @param config
+ * @param? errors
+ */
+{template .formContents}
+    {call aui.form.textField}
+        {param id: 'approvals' /}
+        {param value: $config['approvals'] /}
+        {param labelContent}
+            {getText('hook.guide.config.label')}
+        {/param}
+        {param description: getText('hook.guide.config.description') /}
+        {param extraClasses: 'long' /}
+        {param errorTexts: $errors ? $errors['approvals'] : null /}
+    {/call}
+{/template}

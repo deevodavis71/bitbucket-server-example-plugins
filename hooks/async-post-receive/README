@@ -1,5 +1,0 @@
-# Bitbucket Server Simple Example Asynchronous Hook with Configuration
-
-A simple repository hook plugin for notifying an external URL of changes to a repository.
-
-See the [developer docs](https://developer.atlassian.com/bitbucket/server/docs/latest) for more details.

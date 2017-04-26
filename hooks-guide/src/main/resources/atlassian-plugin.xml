@@ -1,0 +1,61 @@
+<atlassian-plugin key="${project.groupId}.${project.artifactId}" name="${project.name}" plugins-version="2">
+    <plugin-info>
+        <description>${project.description}</description>
+        <version>${project.version}</version>
+        <vendor name="${project.organization.name}" url="${project.organization.url}" />
+    </plugin-info>
+
+    <!-- add our i18n resource -->
+    <resource type="i18n" name="i18n" location="i18n/hooks-guide"/>
+
+    <!-- Simple logging hook -->
+    <repository-hook key="logging-hook" name="Logging Post Hook"
+                     i18n-name-key="hook.guide.logginghook.name"
+                     class="com.atlassian.bitbucket.server.examples.LoggingPostRepositoryHook">
+        <description key="hook.guide.logginghook.description" />
+        <icon>icons/example.png</icon>
+    </repository-hook>
+
+    <!-- Hook that logs all tags created through the REST API. This hook is marked configurable="false" to
+         enable it globally. The hook won't be listed in Repository > Settings > Hooks and cannot be disabled -->
+    <repository-hook key="tag-creation-hook" name="Tag Creation Logging Hook" configurable="false"
+                     class="com.atlassian.bitbucket.server.examples.TagCreationLoggingHook" />
+
+    <!-- Hook that logs all force-pushes -->
+    <repository-hook key="force-push-logger" name="Force Push Logger" configurable="false"
+                     class="com.atlassian.bitbucket.server.examples.ForcePushLoggingHook"/>
+
+    <!-- Hook that prevents branches that have an open pull request from being deleted -->
+    <repository-hook key="branch-in-review" name="Protect Branches in review"
+                     i18n-name-key="hook.guide.branchinreview.name"
+                     class="com.atlassian.bitbucket.server.examples.BranchInReviewHook">
+        <description key="hook.guide.branchinreview.description" />
+        <icon>icons/example.png</icon>
+    </repository-hook>
+
+    <!-- Hook that blocks changes with 'work in progress' commits -->
+    <repository-hook key="no-work-in-progress" name="Block Work in Progress"
+                     class="com.atlassian.bitbucket.server.examples.WorkInProgressHook">
+        <description>Blocks 'Work in progress' commits</description>
+    </repository-hook>
+
+    <!-- Hook that writes a warning when it detects a push to master -->
+    <repository-hook key="push-to-master-hook" name="Warn about pushes to master"
+                     class="com.atlassian.bitbucket.server.examples.PushToMasterWarnHook">
+        <description>Writes a warning to the git client when a push to master is detected</description>
+    </repository-hook>
+
+    <repository-merge-check key="enforce-approvals" name="Enforce Approvals"
+                            class="com.atlassian.bitbucket.server.examples.EnforceApprovalsMergeCheck">
+        <description>Enforces that pull requests must have a minimum number of acceptances before they can be merged.</description>
+        <icon>icons/example.png</icon>
+        <config-form name="Simple Hook Config" key="simpleHook-config">
+            <view>hook.guide.example.hook.simple.formContents</view>
+            <directory location="/static/"/>
+        </config-form>
+        <!-- Validators can be declared separately -->
+        <validator>com.atlassian.bitbucket.server.examples.ApprovalValidator</validator>
+    </repository-merge-check>
+
+
+</atlassian-plugin>

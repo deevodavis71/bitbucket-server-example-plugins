@@ -26,10 +26,18 @@
         <dependencies>
             <dependency>
                 <groupId>com.atlassian.bitbucket.server</groupId>
-                <artifactId>bitbucket-parent</artifactId>
+                <artifactId>bitbucket-api</artifactId>
                 <version>${bitbucket.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>com.atlassian.bitbucket.server</groupId>
+                <artifactId>bitbucket-spi</artifactId>
+                <version>${bitbucket.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.atlassian.bitbucket.server</groupId>
+                <artifactId>bitbucket-util</artifactId>
+                <version>${bitbucket.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
@@ -37,13 +45,13 @@
 
     <modules>
       <module>authentication</module>
-      <module>hooks</module>
+      <module>hooks-guide</module>
       <module>plugin-decorators</module>
       <module>pull-request-ui</module>
     </modules>
 
     <properties>
-        <bitbucket.version>5.0.0-rc3</bitbucket.version>
+        <bitbucket.version>5.0.0-SNAPSHOT</bitbucket.version>
         <bitbucket.data.version>${bitbucket.version}</bitbucket.data.version>
         <amps.version>6.3.0-fef7990</amps.version>
     </properties>

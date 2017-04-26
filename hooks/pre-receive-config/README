@@ -1,5 +1,0 @@
-# Bitbucket Server Example Pre-Receive Hook
-
-A basic plugin provding a hook that blocks all pushes to a configured ref
-
-See the [developer docs](https://developer.atlassian.com/bitbucket/server/docs/latest) for more details.
