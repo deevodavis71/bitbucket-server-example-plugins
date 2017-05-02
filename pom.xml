@@ -46,6 +46,7 @@
     <modules>
       <module>authentication</module>
       <module>hooks-guide</module>
+      <module>is-admin-merge-check</module>
       <module>plugin-decorators</module>
       <module>pull-request-ui</module>
     </modules>
