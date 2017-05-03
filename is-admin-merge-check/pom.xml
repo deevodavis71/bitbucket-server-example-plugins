@@ -13,7 +13,7 @@
         <url>http://www.example.com/</url>
     </organization>
 
-    <name>is-admin-merge-check</name>
+    <name>Bitbucket Server Examples - Repository Merge Checks</name>
     <description>This is the com.mycompany.bitbucket:is-admin-merge-check plugin for Atlassian Bitbucket Server.</description>
     <packaging>atlassian-plugin</packaging>
 
@@ -172,8 +172,8 @@
     </build>
     
     <properties>
-        <bitbucket.version>5.0.0-SNAPSHOT</bitbucket.version>
-        <bitbucket.data.version>5.0.0-SNAPSHOT</bitbucket.data.version>
+        <bitbucket.version>5.0.0-rc10</bitbucket.version>
+        <bitbucket.data.version>${bitbucket.version}</bitbucket.data.version>
         <amps.version>6.3.0-fef7990</amps.version>
         <plugin.testrunner.version>1.2.3</plugin.testrunner.version>
         <atlassian.spring.scanner.version>1.2.13</atlassian.spring.scanner.version>

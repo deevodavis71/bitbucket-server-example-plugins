@@ -22,27 +22,6 @@
         <url>https://bitbucket.org/atlassian/bitbucket-example-plugins</url>
     </scm>
 
-    <dependencyManagement>
-        <dependencies>
-            <dependency>
-                <groupId>com.atlassian.bitbucket.server</groupId>
-                <artifactId>bitbucket-api</artifactId>
-                <version>${bitbucket.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.atlassian.bitbucket.server</groupId>
-                <artifactId>bitbucket-spi</artifactId>
-                <version>${bitbucket.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.atlassian.bitbucket.server</groupId>
-                <artifactId>bitbucket-util</artifactId>
-                <version>${bitbucket.version}</version>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
-
-
     <modules>
       <module>authentication</module>
       <module>hooks-guide</module>
