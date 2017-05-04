@@ -71,7 +71,7 @@
     </build>
 
     <properties>
-        <bitbucket.version>5.0.0-rc10</bitbucket.version>
+        <bitbucket.version>5.0.0</bitbucket.version>
         <bitbucket.data.version>${bitbucket.version}</bitbucket.data.version>
         <amps.version>6.3.0-fef7990</amps.version>
     </properties>
